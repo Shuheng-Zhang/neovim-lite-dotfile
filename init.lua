@@ -1,3 +1,3 @@
-require("keymaps")
 require("options")
+require("keymaps")
 require("lazy_setup")
