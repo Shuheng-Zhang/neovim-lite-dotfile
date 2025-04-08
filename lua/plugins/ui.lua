@@ -16,14 +16,14 @@ return {
 			vim.cmd([[colorscheme catppuccin]])
 		end,
 	},
-  -- indent & code block highlighting
-  {
-    "shellRaining/hlchunk.nvim",
-    event = { "BufReadPre", "BufNewFile" },
-    config = function()
-      require("hlchunk").setup({})
-    end
-  },
+	-- indent & code block highlighting
+	{
+		"shellRaining/hlchunk.nvim",
+		event = { "BufReadPre", "BufNewFile" },
+		config = function()
+			require("hlchunk").setup({})
+		end,
+	},
 	-- statusline
 	{
 		"nvim-lualine/lualine.nvim",
@@ -154,5 +154,14 @@ return {
 				end
 			end, { noremap = true, silent = true, desc = "File Explorer Focus" })
 		end,
+	},
+	{
+		"stevearc/oil.nvim",
+		dependencies = { "nvim-tree/nvim-web-devicons" }, -- use if you prefer nvim-web-devicons
+		config = function()
+			require("oil").setup({})
+			vim.keymap.set("n", "<leader>E", "<cmd>Oil<cr>", { desc = "File Explorer(CWD, OIL)" })
+		end,
+		lazy = false,
 	},
 }
