@@ -26,8 +26,6 @@ opt.wrap = false
 opt.signcolumn = "yes"
 -- enable terminal true color
 opt.termguicolors = true
--- disable mode info if 3rd-party statusline enabled
-opt.showmode = false
 
 -- use nerd fonts icons
 vim.g.have_nerd_font = true

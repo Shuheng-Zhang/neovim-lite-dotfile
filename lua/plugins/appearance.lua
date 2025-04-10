@@ -16,14 +16,6 @@ return {
 			vim.cmd([[colorscheme catppuccin]])
 		end,
 	},
-	-- indent & code block highlighting
-	{
-		"shellRaining/hlchunk.nvim",
-		event = { "BufReadPre", "BufNewFile" },
-		config = function()
-			require("hlchunk").setup({})
-		end,
-	},
 	-- statusline
 	{
 		"nvim-lualine/lualine.nvim",
@@ -46,6 +38,12 @@ return {
 						{ default = true }
 					)
 					return ft_icon .. " " .. str
+				end,
+			}
+			local progress = {
+				"progress",
+				fmt = function(str)
+					return " " .. str
 				end,
 			}
 
@@ -96,72 +94,75 @@ return {
 					lualine_c = { filename, diff, diagnostics },
 					lualine_x = { { lsp_servers }, "encoding", "fileformat" },
 					lualine_y = { "location" },
-					lualine_z = { "progress" },
+					lualine_z = { progress },
 				},
 			})
+			-- disable mode notification
+			vim.opt.showmode = false
 		end,
 	},
 	-- tabline
-	{ "akinsho/bufferline.nvim", version = "*", dependencies = "nvim-tree/nvim-web-devicons", opts = {} },
-	-- file explorer
 	{
-		"nvim-neo-tree/neo-tree.nvim",
-		branch = "v3.x",
+		"akinsho/bufferline.nvim",
+		version = "*",
+		dependencies = "nvim-tree/nvim-web-devicons",
+		opts = {
+			options = {
+				mode = "buffer",
+				offsets = {
+					{ filetype = "neo-tree", text_align = "center", separator = false },
+				},
+			},
+		},
+	},
+	-- folding
+	{
+		"kevinhwang91/nvim-ufo",
 		dependencies = {
-			"nvim-lua/plenary.nvim",
-			"nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
-			"MunifTanjim/nui.nvim",
+			"kevinhwang91/promise-async",
 			{
-				"s1n7ax/nvim-window-picker",
-				version = "2.*",
+				"luukvbaal/statuscol.nvim",
 				config = function()
-					require("window-picker").setup({
-						filter_rules = {
-							include_current_win = false,
-							autoselect_one = true,
-							-- filter using buffer options
-							bo = {
-								-- if the file type is one of following, the window will be ignored
-								filetype = { "neo-tree", "neo-tree-popup", "notify" },
-								-- if the buffer type is one of following, the window will be ignored
-								buftype = { "terminal", "quickfix" },
-							},
+					local builtin = require("statuscol.builtin")
+					require("statuscol").setup({
+						relculright = true,
+						segments = {
+							{ text = { builtin.foldfunc }, click = "v:lua.ScFa" },
+							{ text = { "%s" }, click = "v:lua.ScSa" },
+							{ text = { builtin.lnumfunc, " " }, click = "v:lua.ScLa" },
 						},
 					})
 				end,
 			},
-			-- {"3rd/image.nvim", opts = {}}, -- Optional image support in preview window: See `# Preview Mode` for more information
 		},
-		lazy = false, -- neo-tree will lazily load itself
-		config = function()
-			require("neo-tree").setup({
-				window = { width = 30 },
+		event = "BufReadPost",
+		opts = {
+			provider_selector = function(bufnr, filetype, buftype)
+				return { "treesitter", "indent" }
+			end,
+		},
+		init = function()
+			-- autocmd for disabling folding on filetypes
+			vim.api.nvim_create_autocmd("FileType", {
+				pattern = { "neo-tree" },
+				callback = function()
+					require("ufo").detach()
+					vim.opt_local.foldenable = false
+				end,
 			})
 
-			vim.cmd([[nnoremap \ :Neotree reveal<cr>]])
-			vim.keymap.set(
-				"n",
-				"<leader>e",
-				":Neotree toggle<CR>",
-				{ noremap = true, silent = true, desc = "File Explorer" }
-			) -- focus file explorer
+			vim.o.foldcolumn = "1" -- '0' is not bad
+			vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
+			vim.o.foldlevelstart = 99
+			vim.o.foldenable = true
+			vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
 
-			vim.keymap.set("n", "<leader>o", function()
-				if vim.bo.filetype == "neo-tree" then
-					vim.cmd.wincmd("p")
-				else
-					vim.cmd.Neotree("focus")
-				end
-			end, { noremap = true, silent = true, desc = "File Explorer Focus" })
+			vim.keymap.set("n", "zR", function()
+				require("ufo").openAllFolds()
+			end)
+			vim.keymap.set("n", "zM", function()
+				require("ufo").closeAllFolds()
+			end)
 		end,
-	},
-	{
-		"stevearc/oil.nvim",
-		dependencies = { "nvim-tree/nvim-web-devicons" }, -- use if you prefer nvim-web-devicons
-		config = function()
-			require("oil").setup({})
-			vim.keymap.set("n", "<leader>E", "<cmd>Oil<cr>", { desc = "File Explorer(CWD, OIL)" })
-		end,
-		lazy = false,
 	},
 }
