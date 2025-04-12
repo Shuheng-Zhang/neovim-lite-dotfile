@@ -62,12 +62,12 @@ return {
 	{
 		"stevearc/oil.nvim",
 		dependencies = { "nvim-tree/nvim-web-devicons" }, -- use if you prefer nvim-web-devicons
-		config = function()
-			require("oil").setup({
-				default_file_explorer = false,
-			})
-			vim.keymap.set("n", "<leader>E", "<cmd>Oil --float<cr>", { desc = "File Explorer(CWD, OIL)" })
-		end,
+    opts = {
+			default_file_explorer = true,
+    },
+    keys = {
+      { "<leader>E", "<cmd>Oil --float<cr>", desc = "File Explorer(CWD, OIL)" } 
+    },
 		lazy = false,
 	},
 }

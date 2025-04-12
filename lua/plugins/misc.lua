@@ -1,7 +1,7 @@
 return {
 	{
 		"folke/which-key.nvim",
-		event = "VimEnter",
+		event = "VeryLazy",
 		opts = {
 			mappings = vim.g.have_nerd_font,
 			keys = vim.g.have_nerd_font and {} or {
@@ -35,7 +35,9 @@ return {
 				F12 = "<F12>",
 			},
 			delay = 0,
-			spec = {},
+			spec = {
+        { "<leader>f", group = "Finder" }
+      },
 		},
 	},
 }
