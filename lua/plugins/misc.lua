@@ -36,7 +36,9 @@ return {
 			},
 			delay = 0,
 			spec = {
-        { "<leader>f", group = "Finder" }
+        { "<leader>f", group = "Finder" },
+        { "<leader>l", group = "Language Tools" },
+        { "<leader>u", group = "UI/UX" }
       },
 		},
 	},
