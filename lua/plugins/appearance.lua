@@ -138,7 +138,9 @@ return {
 		event = "BufReadPost",
 		opts = {
 			provider_selector = function(bufnr, filetype, buftype)
-				return { "treesitter", "indent" }
+        -- use [treesitter] or [lsp] as folding provider
+        -- use [indent] as fallback
+				return { "lsp", "indent" }
 			end,
 		},
 		init = function()
@@ -165,4 +167,9 @@ return {
 			end)
 		end,
 	},
+  -- UI for input
+  {
+    'stevearc/dressing.nvim',
+    opts = {},
+  }
 }
