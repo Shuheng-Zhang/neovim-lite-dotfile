@@ -127,8 +127,8 @@ return {
 					require("statuscol").setup({
 						relculright = true,
 						segments = {
-							{ text = { builtin.foldfunc }, click = "v:lua.ScFa" },
 							{ text = { "%s" }, click = "v:lua.ScSa" },
+							{ text = { builtin.foldfunc }, click = "v:lua.ScFa" },
 							{ text = { builtin.lnumfunc, " " }, click = "v:lua.ScLa" },
 						},
 					})
@@ -138,8 +138,8 @@ return {
 		event = "BufReadPost",
 		opts = {
 			provider_selector = function(bufnr, filetype, buftype)
-        -- use [treesitter] or [lsp] as folding provider
-        -- use [indent] as fallback
+				-- use [treesitter] or [lsp] as folding provider
+				-- use [indent] as fallback
 				return { "lsp", "indent" }
 			end,
 		},
@@ -167,9 +167,30 @@ return {
 			end)
 		end,
 	},
-  -- UI for input
-  {
-    'stevearc/dressing.nvim',
-    opts = {},
-  }
+	-- UI for input
+	{
+		"stevearc/dressing.nvim",
+		opts = {},
+	},
+	-- Render markdown beauty
+	{
+		"MeanderingProgrammer/render-markdown.nvim",
+		opts = function(_, opts)
+			if not opts.file_types then
+				opts.file_types = { "markdown" }
+			end
+			-- make sure `Avante` is added as a filetype
+			-- opts.file_types = require("astrocore").list_insert_unique(opts.file_types, { "Avante" })
+		end,
+	},
+	{
+		"OXY2DEV/markview.nvim",
+		opts = function(_, opts)
+			if not opts.preview then
+				opts.preview = { "markdown", "quarto", "rmd" }
+			end
+			-- make sure `Avante` is added as a filetype
+			-- opts.preview = require("astrocore").list_insert_unique(opts.preview, { "Avante" })
+		end,
+	},
 }
