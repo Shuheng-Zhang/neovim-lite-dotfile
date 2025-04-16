@@ -65,9 +65,9 @@ end)
 opt.scrolloff = 20
 
 -- enable folding
-opt.foldenable = true
-opt.foldlevel = 99
-opt.foldlevelstart = 99
+-- opt.foldenable = true
+-- opt.foldlevel = 99
+-- opt.foldlevelstart = 99
 
 -- enable command-line support
 opt.wildmenu = true
