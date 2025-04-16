@@ -1,4 +1,5 @@
 return {
+	-- Key bindings helper
 	{
 		"folke/which-key.nvim",
 		event = "VeryLazy",
@@ -36,10 +37,47 @@ return {
 			},
 			delay = 0,
 			spec = {
-        { "<leader>f", group = "Finder" },
-        { "<leader>l", group = "Language Tools" },
-        { "<leader>u", group = "UI/UX" }
-      },
+				{ "<leader>f", group = "Finder" },
+				{ "<leader>l", group = "Language Tools" },
+				{ "<leader>u", group = "UI/UX" },
+				{ "<leader>t", group = "Terminal" },
+			},
 		},
+	},
+	-- Tmux navigatate helper
+	{
+		"christoomey/vim-tmux-navigator",
+		cmd = {
+			"TmuxNavigateLeft",
+			"TmuxNavigateDown",
+			"TmuxNavigateUp",
+			"TmuxNavigateRight",
+			"TmuxNavigatePrevious",
+			"TmuxNavigatorProcessList",
+		},
+		keys = {
+			{ "<c-h>", "<cmd><C-U>TmuxNavigateLeft<cr>" },
+			{ "<c-j>", "<cmd><C-U>TmuxNavigateDown<cr>" },
+			{ "<c-k>", "<cmd><C-U>TmuxNavigateUp<cr>" },
+			{ "<c-l>", "<cmd><C-U>TmuxNavigateRight<cr>" },
+			{ "<c-\\>", "<cmd><C-U>TmuxNavigatePrevious<cr>" },
+		},
+	},
+	-- Better todo/bug/error/info showing helper
+	{
+		"folke/todo-comments.nvim",
+		dependencies = { "nvim-lua/plenary.nvim" },
+		opts = {},
+	},
+	-- Better back to normal mode
+	{
+		"max397574/better-escape.nvim",
+		opts = {},
+	},
+	-- Auto pairs colon and brackets
+	{
+		"windwp/nvim-autopairs",
+		event = "InsertEnter",
+		config = true,
 	},
 }
