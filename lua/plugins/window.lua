@@ -59,15 +59,16 @@ return {
 			end, { noremap = true, silent = true, desc = "File Explorer Focus" })
 		end,
 	},
+	-- Vim-like file explorer
 	{
 		"stevearc/oil.nvim",
 		dependencies = { "nvim-tree/nvim-web-devicons" }, -- use if you prefer nvim-web-devicons
-    opts = {
+		opts = {
 			default_file_explorer = true,
-    },
-    keys = {
-      { "<leader>E", "<cmd>Oil --float<cr>", desc = "File Explorer(CWD, OIL)" } 
-    },
+		},
+		keys = {
+			{ "<leader>E", "<cmd>Oil --float<cr>", desc = "File Explorer(CWD, OIL)" },
+		},
 		lazy = false,
 	},
 }
