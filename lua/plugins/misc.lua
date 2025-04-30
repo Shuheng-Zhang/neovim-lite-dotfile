@@ -37,10 +37,12 @@ return {
 			},
 			delay = 0,
 			spec = {
+				{ "<leader>b", group = "Buffer" },
 				{ "<leader>f", group = "Finder" },
 				{ "<leader>l", group = "Language Tools" },
 				{ "<leader>u", group = "UI/UX" },
 				{ "<leader>t", group = "Terminal" },
+				{ "<leader>x", group = "Quickfix(Trouble)" },
 			},
 		},
 	},
