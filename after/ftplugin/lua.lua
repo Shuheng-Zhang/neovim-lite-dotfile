@@ -1,4 +1,8 @@
 local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.foldingRange = {
+	dynamicRegistration = false,
+	lineFoldingOnly = true,
+}
 local cmp_capabilities = require("blink.cmp").get_lsp_capabilities()
 
 -- server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
