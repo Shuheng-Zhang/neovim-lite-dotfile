@@ -50,13 +50,13 @@ return {
 				{ noremap = true, silent = true, desc = "File Explorer" }
 			) -- focus file explorer
 
-			vim.keymap.set("n", "<leader>o", function()
-				if vim.bo.filetype == "neo-tree" then
-					vim.cmd.wincmd("p")
-				else
-					vim.cmd.Neotree("focus")
-				end
-			end, { noremap = true, silent = true, desc = "File Explorer Focus" })
+			-- vim.keymap.set("n", "<leader>o", function()
+			-- 	if vim.bo.filetype == "neo-tree" then
+			-- 		vim.cmd.wincmd("p")
+			-- 	else
+			-- 		vim.cmd.Neotree("focus")
+			-- 	end
+			-- end, { noremap = true, silent = true, desc = "File Explorer Focus" })
 		end,
 	},
 	-- Vim-like file explorer
