@@ -127,9 +127,12 @@ return {
 					require("statuscol").setup({
 						relculright = true,
 						segments = {
-							{ text = { "%s" }, click = "v:lua.ScSa" },
+							-- fold indicator
 							{ text = { builtin.foldfunc }, click = "v:lua.ScFa" },
+							-- line number indicator
 							{ text = { builtin.lnumfunc, " " }, click = "v:lua.ScLa" },
+							-- git status indicator
+							{ text = { "%s" }, click = "v:lua.ScSa" },
 						},
 					})
 				end,
@@ -192,5 +195,12 @@ return {
 			-- make sure `Avante` is added as a filetype
 			-- opts.preview = require("astrocore").list_insert_unique(opts.preview, { "Avante" })
 		end,
+	},
+	-- Colorful brackets
+	{
+		"HiPhish/rainbow-delimiters.nvim",
+		dependencies = "nvim-treesitter/nvim-treesitter",
+		main = "rainbow-delimiters.setup",
+		opts = {},
 	},
 }
