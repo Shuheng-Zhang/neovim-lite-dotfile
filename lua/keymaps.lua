@@ -41,6 +41,7 @@ end, { desc = "Close all buffers except current" })
 keymap.set("n", "<leader>bC", function()
 	buffer_close_all()
 end, { desc = "Close all buffers" })
+keymap.set("n", "<leader>bx", "<cmd>bdelete<cr>", { desc = "Close current buffer" })
 
 -- window(buffer) split
 keymap.set("n", "<leader>b\\", "<cmd>vsplit<cr>", { desc = "Vertical split" })
