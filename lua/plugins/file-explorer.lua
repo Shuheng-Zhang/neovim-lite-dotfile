@@ -67,7 +67,7 @@ return {
 			default_file_explorer = true,
 		},
 		keys = {
-			{ "<leader>E", "<cmd>Oil --float<cr>", desc = "File Explorer(CWD, OIL)" },
+			{ "<leader>o", "<cmd>Oil --float<cr>", desc = "File Explorer(CWD, OIL)" },
 		},
 		lazy = false,
 	},
