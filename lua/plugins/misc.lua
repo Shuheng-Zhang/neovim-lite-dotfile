@@ -40,6 +40,7 @@ return {
 				{ "<leader>b", group = "Buffer" },
 				{ "<leader>f", group = "Finder" },
 				{ "<leader>l", group = "Language Tools" },
+				{ "<leader>d", group = "Debugger" },
 				{ "<leader>u", group = "UI/UX" },
 				{ "<leader>t", group = "Terminal" },
 				{ "<leader>x", group = "Quickfix(Trouble)" },
