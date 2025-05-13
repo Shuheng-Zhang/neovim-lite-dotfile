@@ -95,7 +95,27 @@ local lsp_config = {
 			},
 		},
 	},
+
+	init_options = {
+		bundles = {
+			vim.fn.expand("$MASON/share/java-debug-adapter/com.microsoft.java.debug.plugin.jar"),
+			(table.unpack or unpack)(vim.split(vim.fn.glob("$MASON/share/java-test/*.jar"), "\n", {})),
+		},
+	},
 }
 
 -- startup jdtls
 require("jdtls").start_or_attach(lsp_config)
+
+-- create autocmd to load main class configs on LspAttach.
+-- This ensures that the LSP is fully attached.
+vim.api.nvim_create_autocmd("LspAttach", {
+	pattern = "*.java",
+	callback = function(args)
+		local client = vim.lsp.get_client_by_id(args.data.client_id)
+		-- ensure that only the jdtls client is activated
+		if client.name == "jdtls" then
+			require("jdtls.dap").setup_dap_main_class_configs()
+		end
+	end,
+})
