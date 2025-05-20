@@ -43,11 +43,25 @@ return {
 		"mfussenegger/nvim-dap",
 		keys = {
 			{
+				"<leader>da",
+				function()
+					require("dap").set_breakpoint()
+				end,
+				desc = "Set a Breakpoint",
+			},
+			{
 				"<leader>db",
 				function()
 					require("dap").toggle_breakpoint()
 				end,
 				desc = "[Debugeger] Toggle Breakpoint(F9)",
+			},
+			{
+				"<leader>dl",
+				function()
+					require("fzf-lua").dap_breakpoints()
+				end,
+				desc = "[Debugeger] List Breakpoints",
 			},
 			{
 				"<F9>",
