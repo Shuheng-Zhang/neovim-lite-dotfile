@@ -98,11 +98,20 @@ local lsp_config = {
 
 	init_options = {
 		bundles = {
+			-- Debugger
 			vim.fn.expand("$MASON/share/java-debug-adapter/com.microsoft.java.debug.plugin.jar"),
+			-- Testing
 			(table.unpack or unpack)(vim.split(vim.fn.glob("$MASON/share/java-test/*.jar"), "\n", {})),
 		},
 	},
 }
+
+-- SpringBoot
+vim.list_extend(lsp_config.init_options.bundles, require("spring_boot").java_extensions())
+require("spring_boot").setup({
+	ls_path = vim.fn.expand("$MASON/packages/spring-boot-tools") .. "/extension/language-server",
+	jdtls_name = "jdtls",
+})
 
 -- startup jdtls
 require("jdtls").start_or_attach(lsp_config)
