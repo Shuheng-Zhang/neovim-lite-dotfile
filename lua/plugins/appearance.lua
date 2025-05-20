@@ -59,7 +59,7 @@ return {
 
 			local diff = {
 				"diff",
-				colored = true,
+				colored = false,
 				symbols = { added = " ", modified = "󰛿 ", removed = " " }, -- changes diff symbols
 			}
 
