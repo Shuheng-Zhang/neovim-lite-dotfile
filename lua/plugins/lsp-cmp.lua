@@ -35,6 +35,13 @@ return {
 						"github:mason-org/mason-registry",
 						"github:nvim-java/mason-registry",
 					},
+					ui = {
+						icons = {
+							package_installed = "",
+							package_pending = "",
+							package_uninstalled = "",
+						},
+					},
 				},
 			},
 			"williamboman/mason-lspconfig.nvim",
