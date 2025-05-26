@@ -27,6 +27,9 @@ opt.signcolumn = "yes"
 -- enable terminal true color
 opt.termguicolors = true
 
+-- use nerd fonts icons
+vim.g.have_nerd_font = true
+
 -- Preview substitutions live, as you type!
 vim.opt.inccommand = "split"
 
@@ -62,9 +65,9 @@ end)
 opt.scrolloff = 20
 
 -- enable folding
-opt.foldenable = true
-opt.foldlevel = 99
-opt.foldlevelstart = 99
+-- opt.foldenable = true
+-- opt.foldlevel = 99
+-- opt.foldlevelstart = 99
 
 -- enable command-line support
 opt.wildmenu = true
