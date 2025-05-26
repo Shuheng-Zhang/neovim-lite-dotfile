@@ -1,14 +1,4 @@
 return {
-	-- LSP: Java
-	{
-		"mfussenegger/nvim-jdtls",
-	},
-	-- LSP: Java-Springboot
-	{
-		"JavaHello/spring-boot.nvim",
-		lazy = true,
-		config = false,
-	},
 	-- LSP: neovim
 	{
 		-- `lazydev` configures Lua LSP for your Neovim config, runtime and plugins
@@ -227,25 +217,25 @@ return {
 
 			-- local capabilities = require('blink.cmp').get_lsp_capabilities()
 
-			local servers = {
-				lua_ls = {},
-				vtsls = {},
-				jdtls = {},
-			}
+			-- local servers = {
+			-- 	lua_ls = {},
+			-- 	vtsls = {},
+			-- 	jdtls = {},
+			-- }
 
-			local ensure_installed = vim.tbl_keys(servers or {})
-			vim.list_extend(ensure_installed, {
-				"stylua", -- Used to format Lua code
-				"java-debug-adapter",
-				"java-test",
-				"spring-boot-tools",
-			})
-			require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
+			-- local ensure_installed = vim.tbl_keys(servers or {})
+			-- vim.list_extend(ensure_installed, {
+			-- 	"stylua", -- Used to format Lua code
+			-- 	"java-debug-adapter",
+			-- 	"java-test",
+			-- 	"spring-boot-tools",
+			-- })
+			-- require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 
-			require("mason-lspconfig").setup({
-				ensure_installed = {}, -- explicitly set to an empty table (Kickstart populates installs via mason-tool-installer)
-				automatic_installation = false,
-			})
+			-- require("mason-lspconfig").setup({
+			-- 	ensure_installed = {}, -- explicitly set to an empty table (Kickstart populates installs via mason-tool-installer)
+			-- 	automatic_installation = false,
+			-- })
 		end,
 	},
 
