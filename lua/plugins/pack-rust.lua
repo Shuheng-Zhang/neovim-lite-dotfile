@@ -17,7 +17,7 @@ return {
 		"WhoIsSethDaniel/mason-tool-installer.nvim",
 		optional = true,
 		opts = function(_, opts)
-			opts.ensure_installed = require("utils").list_insert_unique(opts.ensure_installed, { "codelldb" })
+			opts.ensure_installed = require("utils").list_insert_unique(opts.ensure_installed, { "codelldb", "taplo" })
 		end,
 	},
 	{
