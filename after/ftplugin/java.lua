@@ -109,7 +109,8 @@ local lsp_config = {
 -- SpringBoot
 vim.list_extend(lsp_config.init_options.bundles, require("spring_boot").java_extensions())
 require("spring_boot").setup({
-	ls_path = vim.fn.expand("$MASON/packages/spring-boot-tools") .. "/extension/language-server",
+	ls_path = vim.fn.expand("$MASON/packages/spring-boot-tools")
+		.. "/extension/language-server/spring-boot-language-server-1.59.0-SNAPSHOT-exec.jar",
 	jdtls_name = "jdtls",
 })
 
