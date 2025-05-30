@@ -85,6 +85,8 @@ return {
 					--  Most Language Servers support renaming across files, etc.
 					map("<leader>ln", vim.lsp.buf.rename, "Rename")
 
+					map("<leader>lf", vim.lsp.buf.format, "Format code")
+
 					-- Execute a code action, usually your cursor needs to be on top of an error
 					-- or a suggestion from your LSP for this to activate.
 					map("<leader>la", require("fzf-lua").lsp_code_actions, "Code Action", { "n", "x" })
