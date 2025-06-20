@@ -26,20 +26,11 @@ return {
 					})
 				end,
 			},
-			-- {"3rd/image.nvim", opts = {}}, -- Optional image support in preview window: See `# Preview Mode` for more information
 		},
 		lazy = false, -- neo-tree will lazily load itself
 		config = function()
 			require("neo-tree").setup({
 				window = { width = 30 },
-				-- sources = {
-				--   "filesystem",
-				--   "buffers",
-				--   "git_status"
-				-- },
-				-- source_selector = {
-				--   winbar = true,
-				-- },
 			})
 
 			vim.cmd([[nnoremap \ :Neotree reveal<cr>]])
@@ -49,14 +40,6 @@ return {
 				":Neotree toggle<CR>",
 				{ noremap = true, silent = true, desc = "File Explorer" }
 			) -- focus file explorer
-
-			-- vim.keymap.set("n", "<leader>o", function()
-			-- 	if vim.bo.filetype == "neo-tree" then
-			-- 		vim.cmd.wincmd("p")
-			-- 	else
-			-- 		vim.cmd.Neotree("focus")
-			-- 	end
-			-- end, { noremap = true, silent = true, desc = "File Explorer Focus" })
 		end,
 	},
 	-- Vim-like file explorer
@@ -67,7 +50,7 @@ return {
 			default_file_explorer = true,
 		},
 		keys = {
-			{ "<leader>o", "<cmd>Oil --float<cr>", desc = "File Explorer(CWD, OIL)" },
+			{ "<leader>o", "<cmd>Oil --float --preview<cr>", desc = "File Explorer(CWD, OIL)" },
 		},
 		lazy = false,
 	},
