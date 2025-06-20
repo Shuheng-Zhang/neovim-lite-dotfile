@@ -18,4 +18,14 @@ function M.list_insert_unique(dst, src)
 	return dst
 end
 
+function M.is_lsp_actived(server_name)
+	local buf_clients = vim.lsp.get_clients()
+	for _, client in ipairs(buf_clients) do
+		if client.name == server_name then
+			return true
+		end
+	end
+	return false
+end
+
 return M
