@@ -54,20 +54,6 @@ keymap.set("n", "<leader>Q", "<cmd>confirm qall<cr>", { desc = "Quit all windows
 keymap.set("n", "<leader>w", "<cmd>w<cr>", { desc = "Save" })
 keymap.set("n", "<leader>n", "<cmd>enew<cr>", { desc = "New file" })
 
--- LSP keymaps
-keymap.set("n", "gd", function()
-	vim.lsp.buf.definition()
-end, { desc = "Goto definition" })
-keymap.set("n", "gD", function()
-	vim.lsp.buf.declaration()
-end, { desc = "Goto Declaration" })
-keymap.set("n", "gl", function()
-	vim.diagnostic.open_float()
-end, { desc = "Show inline diagnostic" })
-keymap.set("n", "gi", function()
-	vim.lsp.buf.implementation()
-end, { desc = "Goto implementation" })
-
 -- create a autocmd for highlighting yanking text
 vim.api.nvim_create_autocmd("TextYankPost", {
 	desc = "Highlight when yanking text",
