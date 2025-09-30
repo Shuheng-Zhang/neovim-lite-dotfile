@@ -20,7 +20,18 @@ local jdtls_bundles = {
 	(table.unpack or unpack)(vim.split(vim.fn.glob("$MASON/share/java-test/*.jar"), "\n", {})),
 }
 
-vim.list_extend(jdtls_bundles, require("spring_boot").java_extensions())
+-- Check is Spring Boot based or not
+-- then enable spring boot support
+for _, file in ipairs({ root_dir .. "/pom.xml", root_dir .. "/build.gradle" }) do
+	local f = io.open(file, "r")
+	if f then
+		local content = f:read("*a")
+		f:close()
+		if content:match("spring%-boot") then
+			vim.list_extend(jdtls_bundles, require("spring_boot").java_extensions())
+		end
+	end
+end
 
 local jdtls_settings = {
 	java = {
