@@ -45,6 +45,7 @@ return {
 				{ "<leader>p", group = "Playground", icon = "󱜚" },
 				{ "<leader>t", group = "Terminal" },
 				{ "<leader>u", group = "Utils", icon = "󰙀" },
+				{ "<leader>r", group = "Http Client", icon = "󰖟" },
 				{ "<leader>x", group = "Quickfix(Trouble)" },
 			},
 		},
