@@ -22,13 +22,15 @@ local jdtls_bundles = {
 
 -- Check is Spring Boot based or not
 -- then enable spring boot support
-for _, file in ipairs({ root_dir .. "/pom.xml", root_dir .. "/build.gradle" }) do
-	local f = io.open(file, "r")
-	if f then
-		local content = f:read("*a")
-		f:close()
-		if content:match("spring%-boot") then
-			vim.list_extend(jdtls_bundles, require("spring_boot").java_extensions())
+if root_dir then
+	for _, file in ipairs({ root_dir .. "/pom.xml", root_dir .. "/build.gradle" }) do
+		local f = io.open(file, "r")
+		if f then
+			local content = f:read("*a")
+			f:close()
+			if content:match("spring%-boot") then
+				vim.list_extend(jdtls_bundles, require("spring_boot").java_extensions())
+			end
 		end
 	end
 end
