@@ -1,5 +1,5 @@
 return {
-  {
+	{
 		"catppuccin/nvim",
 		name = "catppuccin",
 		lazy = false,
@@ -7,17 +7,18 @@ return {
 		config = function()
 			require("catppuccin").setup({
 				flavour = "mocha",
+				transparent_background = true,
 				background = {
 					light = "mocha",
 					dark = "mocha",
 				},
 				float = {
-					transparent = true,
+					transparent = false,
 					solid = true,
 				},
 				auto_integrations = true,
 			})
 			vim.cmd([[colorscheme catppuccin]])
 		end,
-	}
+	},
 }

@@ -30,6 +30,22 @@ return {
 		},
 		lazy = false, -- neo-tree will lazily load itself
 		config = function()
+			-- set up highlight groups for neo-tree
+			vim.cmd([[
+        hi NeoTreeSourceSeparator guifg=#6c7086 guibg=NONE
+        hi NeoTreeTabInactive guifg=#7f849c guibg=NONE
+        hi NeoTreeTabActive guifg=#cdd6f4 guibg=NONE
+      ]])
+			local function setup_neo_tree_highlight_for_transparency()
+				local bg = "NONE" -- 保持透明
+				local fg_dim = "#7a7a7a" -- 非激活灰
+				local fg_bright = "#d0d0d0" -- 激活时亮灰
+
+				vim.api.nvim_set_hl(0, "NeoTreeSourceSeparator", { fg = fg_dim, bg = bg })
+				vim.api.nvim_set_hl(0, "NeoTreeTabInactive", { fg = fg_dim, bg = bg })
+				vim.api.nvim_set_hl(0, "NeoTreeTabActive", { fg = fg_bright, bg = bg, bold = true })
+			end
+
 			require("neo-tree").setup({
 				popup_border_style = "rounded",
 				window = { width = 40 },
@@ -40,6 +56,18 @@ return {
 				},
 				source_selector = {
 					winbar = true,
+					highlight_separator = "NeoTreeSourceSeparator",
+					highlight_tab = "NeoTreeTabInactive",
+					highlight_tab_active = "NeoTreeTabActive",
+					truncation_character = "...",
+				},
+				event_handlers = {
+					{
+						event = "file_open_requested",
+						handler = function()
+							vim.cmd("Neotree close")
+						end,
+					},
 				},
 			})
 
@@ -49,15 +77,19 @@ return {
 				"<leader>e",
 				":Neotree toggle<CR>",
 				{ noremap = true, silent = true, desc = "File Explorer" }
-			) -- focus file explorer
+			)
+			vim.keymap.set("n", "<leader>E", function()
+				if vim.bo.filetype == "neo-tree" then
+					vim.cmd.wincmd("p")
+				else
+					vim.cmd.Neotree("focus")
+				end
+			end, { noremap = true, silent = true, desc = "File Explorer Focus" })
 
-			-- vim.keymap.set("n", "<leader>o", function()
-			-- 	if vim.bo.filetype == "neo-tree" then
-			-- 		vim.cmd.wincmd("p")
-			-- 	else
-			-- 		vim.cmd.Neotree("focus")
-			-- 	end
-			-- end, { noremap = true, silent = true, desc = "File Explorer Focus" })
+			vim.api.nvim_create_autocmd("ColorScheme", {
+				callback = setup_neo_tree_highlight_for_transparency,
+			})
+			setup_neo_tree_highlight_for_transparency()
 		end,
 	},
 	-- Vim-like file explorer
@@ -86,4 +118,3 @@ return {
 		end,
 	},
 }
-
