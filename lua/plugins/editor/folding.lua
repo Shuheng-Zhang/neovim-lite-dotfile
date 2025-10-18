@@ -76,7 +76,6 @@ vim.api.nvim_create_user_command("RefreshFold", function()
 	vim.notify("Fold states refreshed", vim.log.levels.INFO)
 end, {})
 
-
 --- Custom folding line style
 ---
 --- @param virtText table content block object
@@ -131,9 +130,8 @@ local function custom_style_foldtext(virtText, lnum, endLnum, width, truncate)
 	return newVirtText
 end
 
-
 return {
--- folding
+	-- folding
 	{
 		"kevinhwang91/nvim-ufo",
 		dependencies = {
@@ -180,5 +178,5 @@ return {
 				require("ufo.preview"):peekFoldedLinesUnderCursor()
 			end, { desc = "Preview folded lines" })
 		end,
-	}
+	},
 }
