@@ -1,5 +1,5 @@
 -----------------------------------------
--- Setting up Diagnostic UI appearance --
+-- Set up Diagnostic UI appearance     --
 -----------------------------------------
 
 local diagnostic_icons = {
@@ -51,6 +51,9 @@ vim.diagnostic.config({
 -- General LSP setup         --
 -------------------------------
 
+-----------------------------------------
+-- Set up LSP                          --
+-----------------------------------------
 vim.api.nvim_create_autocmd("LspAttach", {
 	group = vim.api.nvim_create_augroup("lsp-attach", { clear = true }),
 	callback = function(event)
