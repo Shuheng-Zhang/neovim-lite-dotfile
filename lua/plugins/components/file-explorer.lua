@@ -31,15 +31,10 @@ return {
 		lazy = false, -- neo-tree will lazily load itself
 		config = function()
 			-- set up highlight groups for neo-tree
-			vim.cmd([[
-        hi NeoTreeSourceSeparator guifg=#6c7086 guibg=NONE
-        hi NeoTreeTabInactive guifg=#7f849c guibg=NONE
-        hi NeoTreeTabActive guifg=#cdd6f4 guibg=NONE
-      ]])
 			local function setup_neo_tree_highlight_for_transparency()
 				local bg = "NONE" -- 保持透明
 				local fg_dim = "#7a7a7a" -- 非激活灰
-				local fg_bright = "#d0d0d0" -- 激活时亮灰
+				local fg_bright = "#ffccff" -- 激活时亮灰
 
 				vim.api.nvim_set_hl(0, "NeoTreeSourceSeparator", { fg = fg_dim, bg = bg })
 				vim.api.nvim_set_hl(0, "NeoTreeTabInactive", { fg = fg_dim, bg = bg })
