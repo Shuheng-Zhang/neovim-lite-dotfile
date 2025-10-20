@@ -15,6 +15,8 @@ return {
 				package_pending = "",
 				package_uninstalled = "",
 			},
+			border = "rounded",
+			backdrop = 80,
 		},
 	},
 }

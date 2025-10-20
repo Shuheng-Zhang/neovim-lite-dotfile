@@ -15,6 +15,11 @@ return {
 						border = "none", -- 去掉边框
 					},
 				},
+				progress = {
+					display = {
+						render_limit = 5,
+					},
+				},
 			})
 		end,
 	},
