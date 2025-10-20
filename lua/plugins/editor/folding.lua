@@ -10,7 +10,7 @@ vim.o.foldmethod = "expr"
 
 -- Use treesitter as default folding impl
 vim.o.foldexpr = "v:lua.vim.treesitter.foldexpr()"
-vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
+vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
 
 -----------------------------------
 --- Folding status manage       ---
