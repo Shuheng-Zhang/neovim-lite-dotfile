@@ -1,6 +1,9 @@
 return {
 	{
 		"saghen/blink.cmp",
+		dependencies = {
+			"Kaiser-Yang/blink-cmp-avante",
+		},
 		event = { "InsertEnter", "CmdlineEnter" },
 		-- use a release tag to download pre-built binaries
 		version = "1.*",
@@ -65,7 +68,17 @@ return {
 			-- Default list of enabled providers defined so that you can extend it
 			-- elsewhere in your config, without redefining it, due to `opts_extend`
 			sources = {
-				default = { "lsp", "snippets", "path", "buffer" },
+				default = { "lsp", "snippets", "avante", "path", "buffer" },
+				providers = {
+					-- add avante supports
+					avante = {
+						module = "blink-cmp-avante",
+						name = "Avante",
+						opts = {
+							-- options for blink-cmp-avante
+						},
+					},
+				},
 			},
 
 			-- (Default) Rust fuzzy matcher for typo resistance and significantly better performance

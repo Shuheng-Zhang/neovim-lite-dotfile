@@ -1,7 +1,7 @@
 return {
 	{
 		"MeanderingProgrammer/render-markdown.nvim",
-		ft = { "markdown" },
+		ft = { "markdown", "Avante" },
 		cmd = { "RenderMarkdown" },
 		opts = {
 			callout = {
@@ -190,6 +190,7 @@ return {
 			win_options = { concealcursor = { rendered = "nvc" } },
 			sign = { enabled = false },
 			render_modes = true,
+			file_types = { "markdown", "Avante" },
 		},
 	},
 }
