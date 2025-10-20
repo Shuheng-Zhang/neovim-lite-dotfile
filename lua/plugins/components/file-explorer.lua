@@ -86,9 +86,9 @@ return {
 				end
 			end, { noremap = true, silent = true, desc = "File Explorer Focus" })
 
-			vim.api.nvim_create_autocmd("ColorScheme", {
-				callback = setup_neo_tree_highlight_for_transparency,
-			})
+			-- vim.api.nvim_create_autocmd("ColorScheme", {
+			-- 	callback = setup_neo_tree_highlight_for_transparency,
+			-- })
 			setup_neo_tree_highlight_for_transparency()
 		end,
 	},
