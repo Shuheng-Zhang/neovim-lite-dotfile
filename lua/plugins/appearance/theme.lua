@@ -13,7 +13,7 @@ return {
 					dark = "mocha",
 				},
 				float = {
-					transparent = false,
+					transparent = true,
 					solid = true,
 				},
 				auto_integrations = true,
