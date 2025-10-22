@@ -76,6 +76,10 @@ if os == "Linux" or os == "Windows" then
 	keymap.set("n", "<A-k>", "<cmd>resize -2<cr>", { silent = true })
 end
 
+-- add keymaps for moving contents blocks that selected with pressing TAB
+keymap.set("v", "<TAB>", ">gv", { noremap = true, silent = true })
+keymap.set("v", "<S-TAB>", "<gv", { noremap = true, silent = true })
+
 -- cancel search
 keymap.set("n", "<ESC>", function()
 	if vim.v.hlsearch == 1 then
