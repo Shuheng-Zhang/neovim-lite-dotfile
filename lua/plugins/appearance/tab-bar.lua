@@ -1,11 +1,11 @@
 return {
-  {
+	{
 		"akinsho/bufferline.nvim",
 		version = "*",
 		dependencies = "nvim-tree/nvim-web-devicons",
 		opts = {
 			options = {
-				mode = "buffer",
+				mode = "buffers",
 				offsets = {
 					{ filetype = "neo-tree", text_align = "center", separator = false },
 				},
@@ -14,7 +14,10 @@ return {
 					local icon = level:match("error") and " " or " "
 					return " " .. icon .. count
 				end,
+				indicator = {
+					style = "underline",
+				},
 			},
 		},
-	}
+	},
 }
