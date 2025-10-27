@@ -25,27 +25,6 @@ return {
 					},
 					separator_style = { "", "" }, -- important
 				},
-				highlights = {
-					indicator_selected = {
-						fg = mocha.peach,
-						bg = "none",
-						sp = mocha.peach,
-						underline = true,
-					},
-					buffer_selected = {
-						fg = mocha.peach,
-						bg = "NONE",
-						bold = true,
-						underline = true,
-						sp = mocha.peach,
-					},
-					close_button_selected = {
-						fg = mocha.red,
-						bg = "NONE",
-						underline = true,
-						sp = mocha.peach,
-					},
-				},
 			})
 		end,
 	},
