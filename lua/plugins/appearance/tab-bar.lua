@@ -4,28 +4,26 @@ return {
 		version = "*",
 		dependencies = {
 			"nvim-tree/nvim-web-devicons",
-			"catppuccin/nvim",
 		},
-		config = function()
-			local mocha = require("catppuccin.palettes").get_palette("mocha")
-
-			require("bufferline").setup({
-				options = {
-					mode = "buffers",
-					offsets = {
-						{ filetype = "neo-tree", text_align = "center", separator = false },
-					},
-					diagnostics = "nvim_lsp",
-					diagnostics_indicator = function(count, level)
-						local icon = level:match("error") and " " or " "
-						return " " .. icon .. count
-					end,
-					indicator = {
-						style = "underline",
-					},
-					separator_style = { "", "" }, -- important
+		opts = {
+			options = {
+				mode = "buffers",
+				separator_style = { "", "" },
+				show_tab_indicators = true,
+				show_buffer_close_icons = false,
+				show_close_icon = false,
+				offsets = {
+					{ filetype = "neo-tree", text_align = "center", separator = false },
 				},
-			})
-		end,
+				diagnostics = "nvim_lsp",
+				diagnostics_indicator = function(count, level)
+					local icon = level:match("error") and " " or " "
+					return " " .. icon .. count
+				end,
+				indicator = {
+					style = "underline",
+				},
+			},
+		},
 	},
 }
