@@ -187,6 +187,20 @@ return {
 				blink = { enabled = true },
 				lsp = { enabled = true },
 			},
+			overrides = {
+				buftype = {
+					nofile = {
+						render_modes = { "n", "c", "i" },
+						debounce = 5,
+						code = {
+							left_pad = 0,
+							right_pad = 0,
+							language_pad = 0,
+						},
+					},
+				},
+				filetype = {},
+			},
 			win_options = { concealcursor = { rendered = "nvc" } },
 			sign = { enabled = false },
 			render_modes = true,
