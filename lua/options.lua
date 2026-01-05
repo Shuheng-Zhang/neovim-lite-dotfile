@@ -7,16 +7,20 @@ opt.relativenumber = true
 
 -- use space instead of tab
 opt.expandtab = true
+-- set 2 space for one tab
+opt.shiftwidth = 2
+-- set 2 space for one tab
+opt.tabstop = 2
+-- set 2 space for one tab
+opt.softtabstop = 2
 -- round indent to multiple of 'shiftwidth'
 opt.shiftround = true
+-- enable smart tab
+opt.smarttab = true
 -- copy indent from current line when open a new line
 opt.autoindent = true
 -- smart indenting when open a new line
 opt.smartindent = true
--- set 2 space for one tab
-opt.tabstop = 2
--- set 2 space for one tab
-opt.shiftwidth = 2
 
 -- highlight current line
 opt.cursorline = true
