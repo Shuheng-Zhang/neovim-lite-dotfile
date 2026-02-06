@@ -50,7 +50,7 @@ opt.swapfile = false
 opt.backup = false
 -- enable undo after neovim is quited
 opt.undofile = true
-opt.undodir = vim.fn.expand("$HOME/.local/share/nvim-lite/undo")
+opt.undodir = vim.fn.expand("$HOME/.local/share/nvim/undo")
 
 -- set new split window open from right-below
 opt.splitright = true
@@ -85,18 +85,4 @@ buffer.fileencoding = "utf-8"
 if not vim.t.bufs then
 	vim.t.bufs = vim.api.nvim_list_bufs()
 end
-
--- Wrap mode auto switching
-vim.api.nvim_create_autocmd("InsertEnter", {
-	desc = "Auto disable wrapText in INSERT mode",
-	callback = function()
-		vim.opt.wrap = false
-	end,
-})
-vim.api.nvim_create_autocmd("InsertLeave", {
-	desc = "Auto enable wrapText in INSERT mode",
-	callback = function()
-		vim.opt.wrap = true
-	end,
-})
 

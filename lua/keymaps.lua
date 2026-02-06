@@ -6,6 +6,7 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = ","
 
+-- Function for closing buffer(s)
 local function buffer_close(bufnr, force)
 	if not bufnr or bufnr == 0 then
 		bufnr = vim.api.nvim_get_current_buf()
@@ -13,7 +14,6 @@ local function buffer_close(bufnr, force)
 	local buftype = vim.bo[bufnr].buftype
 	vim.cmd(("silent! %s %d"):format((force or buftype == "terminal") and "bdelete!" or "confirm bdelete", bufnr))
 end
-
 local function buffer_close_all(keep_current, force)
 	if keep_current == nil then
 		keep_current = false
@@ -51,14 +51,8 @@ keymap.set("n", "<leader>b|", "<cmd>split<cr>", { desc = "Horizontal split" })
 keymap.set("n", "<leader>q", "<cmd>confirm q<cr>", { desc = "Quit window" })
 keymap.set("n", "<leader>Q", "<cmd>confirm qall<cr>", { desc = "Quit all windows" })
 
+-- Save buffer changes
 keymap.set("n", "<leader>w", "<cmd>w<cr>", { desc = "Save" })
 keymap.set("n", "<leader>n", "<cmd>enew<cr>", { desc = "New file" })
 
--- create a autocmd for highlighting yanking text
-vim.api.nvim_create_autocmd("TextYankPost", {
-	desc = "Highlight when yanking text",
-	group = vim.api.nvim_create_augroup("nvim-lite-highlight-yank", { clear = true }),
-	callback = function()
-		vim.highlight.on_yank()
-	end,
-})
+
