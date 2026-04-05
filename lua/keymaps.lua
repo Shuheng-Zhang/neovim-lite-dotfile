@@ -1,6 +1,4 @@
---
--- Global keymappings
---
+-- -------------------------- 全局键位映射配置 -------------------------- --
 
 -- set <leader> key
 vim.g.mapleader = " "
@@ -8,22 +6,22 @@ vim.g.maplocalleader = ","
 
 -- Function for closing buffer(s)
 local function buffer_close(bufnr, force)
-	if not bufnr or bufnr == 0 then
-		bufnr = vim.api.nvim_get_current_buf()
-	end
-	local buftype = vim.bo[bufnr].buftype
-	vim.cmd(("silent! %s %d"):format((force or buftype == "terminal") and "bdelete!" or "confirm bdelete", bufnr))
+  if not bufnr or bufnr == 0 then
+    bufnr = vim.api.nvim_get_current_buf()
+  end
+  local buftype = vim.bo[bufnr].buftype
+  vim.cmd(("silent! %s %d"):format((force or buftype == "terminal") and "bdelete!" or "confirm bdelete", bufnr))
 end
 local function buffer_close_all(keep_current, force)
-	if keep_current == nil then
-		keep_current = false
-	end
-	local current = vim.api.nvim_get_current_buf()
-	for _, bufnr in ipairs(vim.t.bufs) do
-		if not keep_current or bufnr ~= current then
-			buffer_close(bufnr, force)
-		end
-	end
+  if keep_current == nil then
+    keep_current = false
+  end
+  local current = vim.api.nvim_get_current_buf()
+  for _, bufnr in ipairs(vim.t.bufs) do
+    if not keep_current or bufnr ~= current then
+      buffer_close(bufnr, force)
+    end
+  end
 end
 
 local keymap = vim.keymap
@@ -36,10 +34,10 @@ keymap.set("n", "<C-l>", "<C-w><C-l>")
 
 -- Close buffers
 keymap.set("n", "<leader>bc", function()
-	buffer_close_all(true)
+  buffer_close_all(true)
 end, { desc = "Close all buffers except current" })
 keymap.set("n", "<leader>bC", function()
-	buffer_close_all()
+  buffer_close_all()
 end, { desc = "Close all buffers" })
 keymap.set("n", "<leader>bx", "<cmd>bdelete<cr>", { desc = "Close current buffer" })
 
@@ -55,4 +53,24 @@ keymap.set("n", "<leader>Q", "<cmd>confirm qall<cr>", { desc = "Quit all windows
 keymap.set("n", "<leader>w", "<cmd>w<cr>", { desc = "Save" })
 keymap.set("n", "<leader>n", "<cmd>enew<cr>", { desc = "New file" })
 
+-- add keymaps for moving contents blocks that selected with pressing TAB
+keymap.set("v", "<TAB>", ">gv", { noremap = true, silent = true })
+keymap.set("v", "<S-TAB>", "<gv", { noremap = true, silent = true })
 
+-- cancel search
+keymap.set("n", "<ESC><ESC>", function()
+  if vim.v.hlsearch == 1 then
+    local sc = vim.fn.searchcount({ maxcount = 0 }) or {}
+    if (sc.total or 0) > 0 then
+      vim.cmd("nohlsearch")
+      vim.fn.setreg("/", "")
+      return
+    end
+  end
+  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", true, false, true), "n", false)
+end, { noremap = true, silent = true })
+
+-- Check plugin(s) update
+keymap.set("n", "<leader>pu", function()
+  require('utils').pkg_update(nil)
+end, { desc = "Check plugin(s) update" })

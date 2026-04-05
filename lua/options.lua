@@ -1,3 +1,4 @@
+-- -------------------------- 全局 Neovim 配置 -------------------------- --
 local opt = vim.opt
 local buffer = vim.b
 
@@ -58,7 +59,7 @@ opt.splitbelow = true
 
 -- enable system clipboard
 vim.schedule(function()
-	vim.opt.clipboard = "unnamedplus"
+  vim.opt.clipboard = "unnamedplus"
 end)
 
 -- number of screen lines to keep above and below the cursor
@@ -83,6 +84,5 @@ buffer.fileencoding = "utf-8"
 
 -- initialize buffer list
 if not vim.t.bufs then
-	vim.t.bufs = vim.api.nvim_list_bufs()
+  vim.t.bufs = vim.api.nvim_list_bufs()
 end
-
