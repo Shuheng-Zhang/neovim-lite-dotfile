@@ -8,22 +8,26 @@ vim.g.maplocalleader = ","
 
 -- Function for closing buffer(s)
 local function buffer_close(bufnr, force)
-	if not bufnr or bufnr == 0 then
-		bufnr = vim.api.nvim_get_current_buf()
-	end
-	local buftype = vim.bo[bufnr].buftype
-	vim.cmd(("silent! %s %d"):format((force or buftype == "terminal") and "bdelete!" or "confirm bdelete", bufnr))
+  if not bufnr or bufnr == 0 then
+    bufnr = vim.api.nvim_get_current_buf()
+  end
+  local buftype = vim.bo[bufnr].buftype
+  vim.cmd(("silent! %s %d"):format((force or buftype == "terminal") and "bdelete!" or "confirm bdelete", bufnr))
 end
 local function buffer_close_all(keep_current, force)
-	if keep_current == nil then
-		keep_current = false
-	end
-	local current = vim.api.nvim_get_current_buf()
-	for _, bufnr in ipairs(vim.t.bufs) do
-		if not keep_current or bufnr ~= current then
-			buffer_close(bufnr, force)
-		end
-	end
+  if keep_current == nil then
+    keep_current = false
+  end
+  local current = vim.api.nvim_get_current_buf()
+  for _, bufnr in ipairs(vim.t.bufs) do
+    if not keep_current or bufnr ~= current then
+      buffer_close(bufnr, force)
+    end
+  end
+end
+
+local function os_info()
+  return vim.uv.os_uname().sysname
 end
 
 local keymap = vim.keymap
@@ -34,12 +38,35 @@ keymap.set("n", "<C-h>", "<C-w><C-h>")
 keymap.set("n", "<C-k>", "<C-w><C-k>")
 keymap.set("n", "<C-l>", "<C-w><C-l>")
 
+-- cancel search
+keymap.set("n", "<ESC>", function()
+  if vim.v.hlsearch == 1 then
+    local sc = vim.fn.searchcount({ maxcount = 0 }) or {}
+    if (sc.total or 0) > 0 then
+      vim.cmd("nohlsearch")
+      vim.fn.setreg("/", "")
+      return
+    end
+  end
+  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", true, false, true), "n", false)
+end, { noremap = true, silent = true })
+
+-- add keymaps for moving contents blocks that selected with pressing TAB
+keymap.set("v", "<TAB>", ">gv", { noremap = true, silent = true })
+keymap.set("v", "<S-TAB>", "<gv", { noremap = true, silent = true })
+
 -- Close buffers
 keymap.set("n", "<leader>bc", function()
-	buffer_close_all(true)
+  local ok, _ = pcall(Snacks.bufdelete.other)
+  if not ok then
+    buffer_close_all(true)
+  end
 end, { desc = "Close all buffers except current" })
 keymap.set("n", "<leader>bC", function()
-	buffer_close_all()
+  local ok, _ = pcall(Snacks.bufdelete.all)
+  if not ok then
+    buffer_close_all()
+  end
 end, { desc = "Close all buffers" })
 keymap.set("n", "<leader>bx", "<cmd>bdelete<cr>", { desc = "Close current buffer" })
 
@@ -51,8 +78,15 @@ keymap.set("n", "<leader>b|", "<cmd>split<cr>", { desc = "Horizontal split" })
 keymap.set("n", "<leader>q", "<cmd>confirm q<cr>", { desc = "Quit window" })
 keymap.set("n", "<leader>Q", "<cmd>confirm qall<cr>", { desc = "Quit all windows" })
 
+-- add keymaps for resize split window on Linux or Windows
+local os = os_info()
+if os == "Linux" or os == "Windows" then
+  keymap.set("n", "<A-h>", "<cmd>vertical resize -2<cr>", { silent = true })
+  keymap.set("n", "<A-l>", "<cmd>vertical resize +2<cr>", { silent = true })
+  keymap.set("n", "<A-j>", "<cmd>resize +2<cr>", { silent = true })
+  keymap.set("n", "<A-k>", "<cmd>resize -2<cr>", { silent = true })
+end
+
 -- Save buffer changes
 keymap.set("n", "<leader>w", "<cmd>w<cr>", { desc = "Save" })
 keymap.set("n", "<leader>n", "<cmd>enew<cr>", { desc = "New file" })
-
-

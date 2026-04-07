@@ -11,12 +11,20 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 vim.api.nvim_create_autocmd("InsertEnter", {
   desc = "Auto disable wrapText in INSERT mode",
   callback = function()
-  vim.opt.wrap = false
+    vim.opt.wrap = false
   end,
 })
 vim.api.nvim_create_autocmd("InsertLeave", {
   desc = "Auto enable wrapText in INSERT mode",
   callback = function()
-  vim.opt.wrap = true
+    vim.opt.wrap = true
   end,
+})
+
+-- Enable TreeSitter automatically
+vim.api.nvim_create_autocmd("FileType", {
+  desc = "Enable TreeSitter automatically",
+  callback = function()
+    pcall(vim.treesitter.start)
+  end
 })
