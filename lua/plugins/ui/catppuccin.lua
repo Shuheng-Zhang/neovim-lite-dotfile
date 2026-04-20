@@ -28,7 +28,7 @@ return {
 				bg = "NONE",
 			})
 			vim.api.nvim_set_hl(0, "FloatBorder", {
-				fg = "#7aa2f7", -- TokyoNight 蓝（比 catppuccin 更柔和）
+				fg = "#45475a", -- TokyoNight 蓝（比 catppuccin 更柔和）
 				bg = "NONE",
 			})
 
@@ -42,7 +42,7 @@ return {
 			})
 
 			vim.api.nvim_set_hl(0, "FloatBorder", {
-				fg = "#89b4fa",
+				fg = "#45475a", -- TokyoNight 蓝（比 catppuccin 更柔和）
 				bg = "NONE",
 			})
 			vim.api.nvim_set_hl(0, "WinSeparator", {
