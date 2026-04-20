@@ -1,3 +1,3 @@
 return {
-  { 'nvim-mini/mini.animate', version = '*', opts = {} }
+  { 'nvim-mini/mini.animate', version = '*', opts = {}, enabled = false }
 }
